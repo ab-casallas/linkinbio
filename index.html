@@ -16,13 +16,15 @@
       --border: rgba(255,255,255,0.07);
       --text: #f0f0f0;
       --sub: #888;
-      --accent: #e05b3d;
+      --accent: #d34525;
+      --accent-2: #ff6b3d;
+      --peach: #ffd9c7;
       --radius: 16px;
     }
 
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background-color: var(--bg);
+      background: radial-gradient(circle at 50% -10%, rgba(211, 69, 37, 0.12), transparent 50%), var(--bg);
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -77,7 +79,8 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      border: 2px solid var(--border);
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 16px rgba(211, 69, 37, 0.25);
     }
 
     .avatar svg { opacity: 0.4; }
@@ -171,9 +174,19 @@
     }
 
     .link-card:hover {
-      background: var(--card2);
+      background: linear-gradient(135deg, rgba(211, 69, 37, 0.08), transparent);
+      border-color: rgba(211, 69, 37, 0.3);
       transform: translateY(-1px);
     }
+
+    .link-icon { transition: background 0.2s, border-color 0.2s; }
+
+    .link-card:hover .link-icon {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      border-color: transparent;
+    }
+
+    .link-card:hover .link-icon svg { stroke: white; }
 
     .link-icon {
       width: 40px;
@@ -281,17 +294,17 @@
       width: 52px;
       height: 52px;
       border-radius: 50%;
-      background: rgba(255,255,255,0.15);
+      background: rgba(211, 69, 37, 0.3);
       backdrop-filter: blur(6px);
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid rgba(255,255,255,0.2);
+      border: 1px solid rgba(255, 107, 61, 0.35);
       transition: background 0.2s;
     }
 
     .video-thumb:hover .play-btn div {
-      background: rgba(255,255,255,0.25);
+      background: rgba(211, 69, 37, 0.5);
     }
 
     .play-btn svg { width: 22px; height: 22px; fill: white; margin-left: 3px; }
@@ -337,7 +350,7 @@
     }
 
     input::placeholder, textarea::placeholder { color: var(--sub); }
-    input:focus, textarea:focus { border-color: rgba(255,255,255,0.2); }
+    input:focus, textarea:focus { border-color: rgba(211, 69, 37, 0.4); }
 
     textarea {
       resize: none;
@@ -347,8 +360,8 @@
 
     .btn-send {
       width: 100%;
-      background: var(--text);
-      color: var(--bg);
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff;
       font-family: inherit;
       font-size: 14px;
       font-weight: 600;
@@ -359,7 +372,7 @@
       transition: opacity 0.2s;
     }
 
-    .btn-send:hover { opacity: 0.85; }
+    .btn-send:hover { opacity: 0.88; }
 
     /* ── Footer ── */
     .footer {
@@ -380,14 +393,9 @@
 
   <!-- Profile -->
   <div class="profile">
-    <div class="avatar">
-      <!-- Replace src with your photo URL -->
-      <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="white">
-        <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
-      </svg>
-    </div>
+    <img class="avatar" src="avatar.png" alt="Abraham Casallas" />
     <h1>Abraham Casallas</h1>
-    <p>Your Tagline Here</p>
+    <p>I build AI systems that run personal brands. CEO @ Monetize Yourself.</p>
     <div class="stats">
       <a class="stat" href="https://www.instagram.com/abrahamcasallas/" target="_blank" style="text-decoration:none;color:inherit;">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
@@ -400,6 +408,21 @@
     </div>
   </div>
 
+
+  <!-- Link — AI Content Engine Kit -->
+  <a class="link-card" href="https://agent.monetizeyourself.com/" target="_blank">
+    <div class="link-icon">
+      <div class="dot"></div>
+      <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+      </svg>
+    </div>
+    <div class="link-info">
+      <strong>AI Content Engine Kit</strong>
+      <span>Turn any AI into a content strategist that sounds like you</span>
+    </div>
+    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+  </a>
 
   <!-- Link — Lead Magnet -->
   <a class="link-card" href="https://www.monetizeyourself.com/0-10k-system" target="_blank">
@@ -416,31 +439,16 @@
     <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
   </a>
 
-  <!-- Link — Newsletter -->
-  <a class="link-card" href="https://www.monetizeyourself.com/0-10k-system" target="_blank">
+  <!-- Link — Client Results -->
+  <a class="link-card" href="https://www.monetizeyourself.com/success-stories" target="_blank">
     <div class="link-icon">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="2" y="4" width="20" height="16" rx="2"/>
-        <path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7"/>
+        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>
       </svg>
     </div>
     <div class="link-info">
-      <strong>Newsletter</strong>
-      <span>Sign up to my newsletter</span>
-    </div>
-    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-  </a>
-
-  <!-- Link — Templates / Shop -->
-  <a class="link-card" href="#" target="_blank">
-    <div class="link-icon">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
-      </svg>
-    </div>
-    <div class="link-info">
-      <strong>Templates</strong>
-      <span>Discover high quality resources</span>
+      <strong>Real Results</strong>
+      <span>See what clients are building with AI</span>
     </div>
     <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
   </a>
@@ -470,22 +478,6 @@
     </div>
   </div>
 
-  <!-- Link — Coffee Setup with thumbnail -->
-  <a class="link-card" href="#" target="_blank">
-    <div class="link-icon" style="border-radius:10px;overflow:hidden;background:none;border:none;padding:0;">
-      <img
-        src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=80&auto=format&fit=crop&q=80"
-        alt="Coffee"
-        style="width:40px;height:40px;object-fit:cover;border-radius:10px;display:block;"
-      />
-    </div>
-    <div class="link-info">
-      <strong>Coffee Setup</strong>
-      <span>I love coffee. Check out my setup.</span>
-    </div>
-    <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-  </a>
-
   <!-- From Instagram -->
   <div class="section-card">
     <div class="section-header">
@@ -505,28 +497,6 @@
       <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&auto=format&fit=crop&q=80" alt="Post 1" />
       <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&auto=format&fit=crop&q=80" alt="Post 2" />
       <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=400&auto=format&fit=crop&q=80" alt="Post 3" />
-    </div>
-  </div>
-
-  <!-- Contact Form -->
-  <div class="section-card">
-    <div class="section-header">
-      <div class="section-label">
-        <div class="icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-          </svg>
-        </div>
-        Drop a line
-      </div>
-    </div>
-    <div class="form-body">
-      <div class="form-row">
-        <input type="text" placeholder="Your name" />
-        <input type="email" placeholder="Your email" />
-      </div>
-      <textarea placeholder="Leave a message..."></textarea>
-      <button class="btn-send">Send message</button>
     </div>
   </div>
 
