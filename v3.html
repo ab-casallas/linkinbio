@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abraham Casallas — Link in Bio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --paper: #f1efe9;
+      --paper-2: #e9e6df;
+      --card: #ffffff;
+      --card-2: #f7f5f0;
+      --ink: #0c0c0c;
+      --ink-2: #2a2a28;
+      --sub: #6b6b66;
+      --mute: #a8a6a0;
+      --line: rgba(12, 12, 12, 0.08);
+      --line-2: rgba(12, 12, 12, 0.14);
+      --dot: rgba(12, 12, 12, 0.55);
+      --dot-faint: rgba(12, 12, 12, 0.18);
+      --radius: 22px;
+      --radius-sm: 12px;
+      --shadow: 0 1px 2px rgba(12, 12, 12, 0.04), 0 8px 24px rgba(12, 12, 12, 0.05), 0 24px 60px rgba(12, 12, 12, 0.04);
+      --shadow-hover: 0 1px 2px rgba(12, 12, 12, 0.05), 0 12px 28px rgba(12, 12, 12, 0.08), 0 32px 80px rgba(12, 12, 12, 0.06);
+    }
+
+    html, body { background: var(--paper); }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      color: var(--ink);
+      padding: 36px 16px 80px;
+      display: flex;
+      justify-content: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* paper grain — subtle dot field, INVERSE of the dark site */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(12, 12, 12, 0.07) 0.6px, transparent 0.6px);
+      background-size: 18px 18px;
+      mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 30%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse 90% 70% at 50% 30%, black 30%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      width: 100%;
+      max-width: 460px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Top index row ── */
+    .index-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4px 4px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--sub);
+      text-transform: uppercase;
+    }
+
+    .index-row .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .index-row .pulse {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ink);
+      animation: pulse 1.6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.85); }
+    }
+
+    /* ── Generic card ── */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    /* ── Profile (wallet-stack effect) ── */
+    .profile-stack {
+      position: relative;
+      padding-top: 14px;
+    }
+
+    .profile-stack::before,
+    .profile-stack::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--card-2);
+      border-radius: var(--radius);
+      box-shadow: 0 1px 2px rgba(12, 12, 12, 0.04), 0 6px 18px rgba(12, 12, 12, 0.04);
+    }
+    .profile-stack::before {
+      top: 0;
+      width: 92%;
+      height: 18px;
+      z-index: 0;
+    }
+    .profile-stack::after {
+      top: 7px;
+      width: 96%;
+      height: 18px;
+      z-index: 0;
+      background: #fbfaf6;
+    }
+
+    .profile {
+      position: relative;
+      padding: 28px 24px 22px;
+      z-index: 1;
+    }
+
+    .profile-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 14px;
+      object-fit: cover;
+      background: var(--card-2);
+      border: 1px solid var(--line);
+      flex-shrink: 0;
+    }
+
+    .profile-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 10.5px;
+      color: var(--sub);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      line-height: 1.3;
+      text-align: right;
+      padding-top: 4px;
+    }
+
+    .profile-meta .id { color: var(--ink); font-weight: 500; }
+
+    .profile h1 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .profile .bio {
+      font-size: 14.5px;
+      line-height: 1.5;
+      color: var(--ink-2);
+      max-width: 92%;
+    }
+
+    .status-line {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 11.5px;
+      color: var(--ink);
+      letter-spacing: 0.04em;
+    }
+
+    .status-line .arrow { color: var(--mute); }
+
+    .ink-cursor {
+      display: inline-block;
+      width: 7px;
+      height: 12px;
+      background: var(--ink);
+      animation: blink 1.05s steps(2, end) infinite;
+      vertical-align: -1px;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      50.01%, 100% { opacity: 0; }
+    }
+
+    /* ── Socials row ── */
+    .socials {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .social {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 14px;
+      background: var(--card-2);
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      color: var(--ink);
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 11.5px;
+      letter-spacing: 0.04em;
+      transition: background 0.18s, transform 0.18s;
+    }
+
+    .social:hover {
+      background: var(--ink);
+      color: var(--paper);
+      transform: translateY(-1px);
+    }
+
+    .social .label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .social .label svg { width: 13px; height: 13px; }
+
+    .social .arrow { font-size: 13px; opacity: 0.5; }
+
+    /* ── Link cards ── */
+    .link-card {
+      display: flex;
+      align-items: stretch;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: var(--ink);
+      overflow: hidden;
+      transition: transform 0.18s, box-shadow 0.18s;
+      cursor: pointer;
+    }
+
+    .link-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .link-num {
+      width: 56px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      background: var(--card-2);
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink);
+      border-right: 1px solid var(--line);
+    }
+
+    .link-num .dot-row {
+      display: flex;
+      gap: 3px;
+    }
+
+    .link-num .dot-row span {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--dot-faint);
+    }
+
+    .link-num .dot-row span.on {
+      background: var(--ink);
+    }
+
+    .link-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 18px;
+    }
+
+    .link-info { flex: 1; min-width: 0; }
+
+    .link-eyebrow {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 10px;
+      color: var(--mute);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .link-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+      line-height: 1.2;
+      margin-bottom: 3px;
+    }
+
+    .link-sub {
+      font-size: 13px;
+      color: var(--sub);
+      line-height: 1.4;
+    }
+
+    .link-arrow {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--card-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.18s, transform 0.18s;
+    }
+
+    .link-card:hover .link-arrow {
+      background: var(--ink);
+      transform: translate(2px, -2px);
+    }
+
+    .link-card:hover .link-arrow svg { stroke: var(--paper); }
+
+    .link-arrow svg {
+      width: 14px;
+      height: 14px;
+      stroke: var(--ink);
+      transition: stroke 0.18s;
+    }
+
+    /* ── Section card ── */
+    .section-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 20px 14px;
+    }
+
+    .section-label {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-label .marker {
+      color: var(--mute);
+    }
+
+    .section-meta {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mute);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.18s;
+    }
+    .section-meta:hover { color: var(--ink); }
+
+    /* ── Video ── */
+    .video-thumb {
+      position: relative;
+      margin: 0 14px 16px;
+      border-radius: 14px;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--card-2);
+      box-shadow: 0 1px 2px rgba(12, 12, 12, 0.06), 0 6px 18px rgba(12, 12, 12, 0.05);
+    }
+
+    .video-thumb img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .video-thumb:hover img { transform: scale(1.02); }
+
+    .play-btn {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .play-btn div {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 14px rgba(12, 12, 12, 0.18), 0 1px 2px rgba(12, 12, 12, 0.12);
+      transition: transform 0.2s;
+    }
+
+    .video-thumb:hover .play-btn div {
+      transform: scale(1.06);
+    }
+
+    .play-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--ink);
+      margin-left: 3px;
+    }
+
+    .video-caption {
+      padding: 0 20px 18px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.08em;
+      color: var(--mute);
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* ── Instagram grid ── */
+    .insta-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+      padding: 0 14px 16px;
+    }
+
+    .insta-grid a {
+      display: block;
+      aspect-ratio: 1;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      background: var(--card-2);
+    }
+
+    .insta-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .insta-grid a:hover img {
+      transform: scale(1.04);
+    }
+
+    /* ── Footer ── */
+    .footer {
+      text-align: center;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 10.5px;
+      letter-spacing: 0.1em;
+      color: var(--mute);
+      padding-top: 12px;
+      text-transform: uppercase;
+    }
+
+    .footer .slash { color: var(--ink); }
+
+    @media (max-width: 380px) {
+      .profile h1 { font-size: 24px; }
+      .link-num { width: 48px; }
+      .link-body { padding: 14px 14px; }
+      .link-title { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Top index strip -->
+  <div class="index-row">
+    <div class="badge"><span class="pulse"></span>LIVE / 2026</div>
+    <div>v3 · LINKS</div>
+  </div>
+
+  <!-- Profile (stacked card) -->
+  <div class="profile-stack card">
+    <div class="profile">
+      <div class="profile-top">
+        <img class="avatar" src="avatar.png" alt="Abraham Casallas" />
+        <div class="profile-meta">
+          <div class="id">@ABRAHAMCASALLAS</div>
+          <div>NYC · EST</div>
+        </div>
+      </div>
+
+      <h1>Abraham<br>Casallas.</h1>
+      <p class="bio">Helping people build businesses on the internet with AI. Building Monetize Yourself.</p>
+
+      <div class="status-line">
+        <span class="arrow">&gt;</span><span>STATUS: SHIPPING_DAILY</span><span class="ink-cursor"></span>
+      </div>
+
+      <div class="socials">
+        <a class="social" href="https://www.instagram.com/abrahamcasallas/" target="_blank" rel="noopener">
+          <span class="label">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            INSTAGRAM
+          </span>
+          <span class="arrow">↗</span>
+        </a>
+        <a class="social" href="https://www.youtube.com/@abraham.casallas" target="_blank" rel="noopener">
+          <span class="label">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            YOUTUBE
+          </span>
+          <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Link — AI Content Engine Kit -->
+  <a class="link-card" href="https://agent.monetizeyourself.com/" target="_blank" rel="noopener">
+    <div class="link-num">
+      <div>01</div>
+      <div class="dot-row"><span class="on"></span><span></span><span></span></div>
+    </div>
+    <div class="link-body">
+      <div class="link-info">
+        <div class="link-eyebrow">PRODUCT · $37</div>
+        <div class="link-title">AI Content Engine Kit</div>
+        <div class="link-sub">Turn any AI into a world-class content strategist.</div>
+      </div>
+      <div class="link-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+      </div>
+    </div>
+  </a>
+
+  <!-- Link — Lead Magnet -->
+  <a class="link-card" href="https://www.monetizeyourself.com/0-10k-system" target="_blank" rel="noopener">
+    <div class="link-num">
+      <div>02</div>
+      <div class="dot-row"><span></span><span class="on"></span><span></span></div>
+    </div>
+    <div class="link-body">
+      <div class="link-info">
+        <div class="link-eyebrow">FREE · GUIDE</div>
+        <div class="link-title">The 0–$10K Playbook</div>
+        <div class="link-sub">Get my free guide to grow from 0 to 10K.</div>
+      </div>
+      <div class="link-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+      </div>
+    </div>
+  </a>
+
+  <!-- Link — Success Stories -->
+  <a class="link-card" href="https://www.monetizeyourself.com/success-stories" target="_blank" rel="noopener">
+    <div class="link-num">
+      <div>03</div>
+      <div class="dot-row"><span></span><span></span><span class="on"></span></div>
+    </div>
+    <div class="link-body">
+      <div class="link-info">
+        <div class="link-eyebrow">PROOF · CLIENTS</div>
+        <div class="link-title">Success Stories</div>
+        <div class="link-sub">See what creators are building with us.</div>
+      </div>
+      <div class="link-arrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H8M17 7v9"/></svg>
+      </div>
+    </div>
+  </a>
+
+  <!-- Latest Video -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-label"><span class="marker">&gt;&gt;</span>LATEST_BROADCAST</div>
+      <a class="section-meta" href="https://www.youtube.com/@abraham.casallas" target="_blank" rel="noopener">YOUTUBE ↗</a>
+    </div>
+    <div class="video-thumb" onclick="window.open('https://youtu.be/laBgjPSjfaA','_blank')">
+      <img src="images/video-thumb.png" alt="Latest Video" />
+      <div class="play-btn">
+        <div>
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="video-caption">
+      <span>EP · NEW</span>
+      <span>WATCH NOW</span>
+    </div>
+  </div>
+
+  <!-- From Instagram -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-label"><span class="marker">&gt;&gt;</span>FROM_INSTAGRAM</div>
+      <a class="section-meta" href="https://www.instagram.com/abrahamcasallas/" target="_blank" rel="noopener">@ABRAHAMCASALLAS ↗</a>
+    </div>
+    <div class="insta-grid">
+      <a href="https://www.instagram.com/p/DWCMR3FCutQ" target="_blank" rel="noopener"><img src="images/post-1.jpg" alt="Instagram Content System" /></a>
+      <a href="https://www.instagram.com/reel/DWTo4K0P_jN/" target="_blank" rel="noopener"><img src="images/post-2.png" alt="How to Automate Your Business Using AI" /></a>
+      <a href="https://www.instagram.com/reel/DTggugdibCK/" target="_blank" rel="noopener"><img src="images/post-3.png" alt="Post 3" /></a>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="slash">//</span> BUILT BY MY AI AGENT · NOVA
+  </div>
+
+</div>
+</body>
+</html>
