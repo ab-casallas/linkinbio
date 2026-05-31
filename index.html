@@ -145,15 +145,14 @@
 
     .profile-top {
       display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 14px;
+      align-items: center;
+      gap: 15px;
       margin-bottom: 18px;
     }
 
     .avatar {
-      width: 60px;
-      height: 60px;
+      width: 62px;
+      height: 62px;
       border-radius: 14px;
       object-fit: cover;
       background: var(--card-2);
@@ -161,10 +160,18 @@
       flex-shrink: 0;
     }
 
-    .profile-meta {
+    .name-block {
+      flex: 1;
+      min-width: 0;
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
+      gap: 7px;
+    }
+
+    .profile-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
       gap: 6px;
       font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 10.5px;
@@ -172,18 +179,17 @@
       text-transform: uppercase;
       letter-spacing: 0.06em;
       line-height: 1.3;
-      text-align: right;
-      padding-top: 4px;
     }
 
     .profile-meta .id { color: var(--ink); font-weight: 500; }
+    .profile-meta .dot-sep { color: var(--mute); }
 
     .profile h1 {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1.05;
-      margin-bottom: 12px;
+      margin-bottom: 0;
     }
 
     .profile .bio {
@@ -551,14 +557,16 @@
     <div class="profile">
       <div class="profile-top">
         <img class="avatar" src="avatar.png" alt="Abraham Casallas" />
-        <div class="profile-meta">
-          <div class="id">@ABRAHAMCASALLAS</div>
-          <div>NYC · EST</div>
+        <div class="name-block">
+          <h1>Abraham Casallas.</h1>
+          <div class="profile-meta">
+            <span class="id">@ABRAHAMCASALLAS</span>
+            <span class="dot-sep">·</span>
+            <span>NYC · EST</span>
+          </div>
         </div>
       </div>
-
-      <h1>Abraham Casallas.</h1>
-      <p class="bio">Helping people build businesses on the internet with AI. &#10146; Head of AI <a class="bio-link" href="https://www.instagram.com/theschoolofhardknockz/" target="_blank" rel="noopener">@theschoolofhardknockz</a></p>
+      <p class="bio">Helping people build online business with AI. &#10146; Head of AI <a class="bio-link" href="https://www.instagram.com/theschoolofhardknockz/" target="_blank" rel="noopener">@theschoolofhardknockz</a></p>
 
       <div class="status-line">
         <span class="arrow">&gt;</span><span>STATUS: SHIPPING_DAILY</span><span class="ink-cursor"></span>
